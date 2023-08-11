@@ -1,0 +1,34 @@
+#!/usr/bin/python3
+
+import sys
+
+if __name__ == '__main__':
+    files = sys.argv[1::]
+
+    if '-h' in files or '--help' in files:
+        print('''fd: File dump - dump file content to stdout
+fd [OPTION] FILES
+
+Options:
+    -h, --help      Show this message and exit''')
+        sys.exit(0)
+
+    for file in files:
+        try:
+            with open(file, 'r') as file:
+                print(file.read())
+
+        except IsADirectoryError:
+            print(f'Error: "{file}" is a directory')
+            
+        except FileNotFoundError:
+            print(f'Error: "{file}" can\'t be found')
+
+        except PermissionError:
+            print(f'Error: you are not allowed to read "{file}"')
+
+        except:
+            pass
+
+    
+                               
