@@ -13,8 +13,15 @@ Options:
     -h, --help      Show this message and exit''')
         sys.exit(0)
 
+    logFileName = False
+    if len(files) > 1:
+        logFileName = True
+
     for file in files:
         try:
+            if logFileName:
+                print(f'File: "{file}"')
+                
             with open(file, 'r') as file:
                 print(file.read())
 
